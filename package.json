@@ -1,0 +1,17 @@
+{
+  "name": "javascript2",
+  "version": "1.0.0",
+  "description": "learn npm",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app",
+    "fol": "ls",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "shilla",
+  "license": "ISC",
+  "dependencies": {
+    "validator": "^13.12.0",
+    "Validator": "^1.1.4"
+  }
+}
