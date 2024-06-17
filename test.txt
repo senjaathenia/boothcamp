@@ -1,1 +1,7 @@
 hello nama saya
+
+cons questions = (ask)=>{
+    return new promise((resolve,reject) =>{
+        ask, inputVariable
+    })
+}
