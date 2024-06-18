@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Kontak</title>
+    <!-- Sertakan CSS Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        /* Pastikan semua tombol memiliki margin dan display inline-block */
+        .contact-actions form {
+            display: inline-block;
+        }
+        .contact-actions button, .contact-actions a {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Contact Page.</h1>
+        <nav>
+            <ul>
+                <li><a href="/" class="btn btn-primary" style="margin: 5px;">Index</a></li>
+                <li><a href="/about" class="btn btn-primary" style="margin: 5px;">About</a></li>
+                <!-- <li><a href="/contact" class="btn btn-primary" style="margin: 5px;">Contact</a></li> -->
+            </ul>
+        </nav>
+        <ul class="list-group">
+            <% contacts.forEach(contact => { %>
+                <li class="list-group-item">
+                    <strong>Nama:</strong> <%= contact.nama %> <br>
+                    <strong>Nomor Telepon:</strong> <%= contact.notelp %> <br>
+                    <div class="contact-actions">
+                        <a href="/edit/<%= contact.nama %>" class="btn btn-primary">Edit</a>
+                        <form action="/hapus/<%= contact.nama %>" method="POST">
+                            <button type="submit" class="btn btn-danger" onclick=" return confirm('Data ini akan di hapus?')">Hapus</button>
+                        </form>
+                    </div>
+                </li>
+            <% }); %>
+        </ul>
+        <a href="/tambah" class="btn btn-success" style="margin: 10px 0;">Tambah Kontak</a>
+    </div>
+</body>
+</html>
