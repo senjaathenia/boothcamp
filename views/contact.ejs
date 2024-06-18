@@ -17,7 +17,6 @@
     </style>
 </head>
 <body>
-    <div class="container">
         <h1>Contact Page.</h1>
         <nav>
             <ul>
@@ -32,15 +31,14 @@
                     <strong>Nama:</strong> <%= contact.nama %> <br>
                     <strong>Nomor Telepon:</strong> <%= contact.notelp %> <br>
                     <div class="contact-actions">
-                        <a href="/edit/<%= contact.nama %>" class="btn btn-primary">Edit</a>
+                        <!-- <a href="/edit/<%= contact.nama %>" class="btn btn-primary">Edit</a>
                         <form action="/hapus/<%= contact.nama %>" method="POST">
-                            <button type="submit" class="btn btn-danger" onclick=" return confirm('Data ini akan di hapus?')">Hapus</button>
+                            <button type="submit" class="btn btn-danger" onclick=" return confirm('Data ini akan di hapus?')">Hapus</button> -->
                         </form>
                     </div>
                 </li>
             <% }); %>
         </ul>
-        <a href="/tambah" class="btn btn-success" style="margin: 10px 0;">Tambah Kontak</a>
-    </div>
+        <!-- <a href="/tambah" class="btn btn-success" style="margin: 10px 0;">Tambah Kontak</a> -->
 </body>
 </html>
