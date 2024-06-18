@@ -1,17 +1,12 @@
 [
   {
-    "nama": "Kenma",
-    "notelp": "089123812379",
-    "email": "theplayer@gmail.com"
-  },
-  {
     "nama": "Gintoki",
     "notelp": "0823613974458",
     "email": "shiroyasha@gmail.com"
   },
   {
     "nama": "Dazai",
-    "notelp": "081645731612234",
+    "notelp": "08164573234233",
     "email": "dazaiosamu@gmail.com"
   },
   {
@@ -20,8 +15,13 @@
     "email": "kaizoku@gmail.com"
   },
   {
-    "nama": "Zafran",
-    "notelp": "085722885970",
-    "email": "zafran@gmail.com"
+    "nama": "Kenma",
+    "notelp": "08646534765577",
+    "email": "gamers@gmail.com"
+  },
+  {
+    "nama": "Asta",
+    "notelp": "08739246293419",
+    "email": "blackclover@gmail.com"
   }
 ]
