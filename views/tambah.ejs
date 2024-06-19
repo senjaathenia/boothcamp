@@ -4,17 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tambah</title>
+    <!-- Sertakan CSS Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Tambah Contact</h1>
-    <form action="/addContact" method="post">
-        <label for="nama">Nama</label>
-        <input type="text" name="nama" placeholder="Nama"> <br><br>
-        <label for="nama">No Telpon</label>
-        <input type="text" name="notelp" placeholder="No Telp"><br><br>
-        <label for="nama">Email</label>
-        <input type="text" name="email" placeholder="Email"><br><br>
-        <button type="submit">Simpan</button>
-    </form>
+    <div class="container">
+        <h1>Tambah Contact</h1>
+        <form action="/addContact" method="post">
+            <div class="form-group">
+                <label for="nama">Nama</label>
+                <input type="text" id="nama" name="nama" class="form-control" placeholder="Masukkan nama Anda" required>
+            </div>
+            <div class="form-group">
+                <label for="notelp">No Telp</label>
+                <input type="text" id="notelp" name="notelp" class="form-control" placeholder="Masukkan nomor telepon Anda" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="Masukkan alamat email Anda" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+        </form>
+    </div>
+
+    <!-- Sertakan script Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
