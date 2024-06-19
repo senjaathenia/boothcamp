@@ -6,40 +6,60 @@
     <title>Daftar Kontak</title>
     <!-- Sertakan CSS Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <!-- <style>
+    <style>
         .contact-actions form {
             display: inline-block;
         }
         .contact-actions button, .contact-actions a {
             margin: 5px;
         }
-    </style> -->
+        
+    </style>
 </head>
 <body>
-        <h1>Contact Page.</h1>
-        <nav>
-            <table class="table table-success table-striped-columns">
-            <ul>
-                <li><a href="/" class="btn btn-primary" style="margin: 5px;">Index</a></li>
-                <li><a href="/about" class="btn btn-primary" style="margin: 5px;">About</a></li>
-                <!-- <li><a href="/contact" class="btn btn-primary" style="margin: 5px;">Contact</a></li> -->
-            </ul>
-        </nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-info">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/contact"><b>Contacts</b></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/index"><i><u>Index</u></i></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/about"><i><u>About</u></i></a>
+              </li>
+          </div>
+        </div>
+      </nav>
+      <h1>Contacts Page</h1>
+        <table class="table table-primary table-striped table-columns" border="1">
+            <thead>
+                <tr>
+                    <th>Nama</th>
+                    <th>No Telepon</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+     <tbody>
         <ul class="list-group">
             <% contacts.forEach(contact => { %>
-                <li class="list-group-item">
-                    <strong>Nama:</strong> <%= contact.nama %> <br>
-                    <strong>Nomor Telepon:</strong> <%= contact.notelp %> <br>
-                    <div class="contact-actions">
+                <tr>
+                    <td><%= contact.nama %></td>
+                    <td><%= contact.notelp %></td>
+                    <td class="contact-actions">
                         <!-- <a href="/edit/<%= contact.nama %>" class="btn btn-primary">Edit</a>
-                        <form action="/hapus/<%= contact.nama %>" method="POST">
-                            <button type="submit" class="btn btn-danger" onclick=" return confirm('Data ini akan di hapus?')">Hapus</button> -->
-                        </form>
-                    </div>
-                </li>
+                        <form action="/hapus/<%= contact.nama %>" method="POST" style="display:inline;">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Data ini akan di hapus?')">Hapus</button>
+                        </form> -->
+                    </td>
+                </tr>
             <% }); %>
-        </ul>
+        </tbody>
     </table>
+        
         <!-- <a href="/tambah" class="btn btn-success" style="margin: 10px 0;">Tambah Kontak</a> -->
 </body>
 </html>
