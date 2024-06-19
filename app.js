@@ -4,13 +4,14 @@ const fs = require('fs');
 const path = require('path');
 const bodyParser = require('body-parser');
 const port = 3000;
+const morgan = require('morgan')
 
 app.use((req, res, next) => {
     console.log('Time:', Date.now())
     next()
   })
 app.use(express.static('public'))
-
+app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set('view engine', 'ejs');
