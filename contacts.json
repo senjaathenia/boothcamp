@@ -1,10 +1,5 @@
 [
   {
-    "nama": "Nami",
-    "notelp": "08217391398133",
-    "email": "navigator@gmail.com"
-  },
-  {
     "nama": "Luffy",
     "notelp": "08613751768992",
     "email": "kaizoku@gmail.com"
@@ -43,5 +38,10 @@
     "nama": "Jinbe",
     "notelp": "08134124821423",
     "email": "kaikyou@gmail.com"
+  },
+  {
+    "nama": "Nami",
+    "notelp": "08372383813473",
+    "email": "navigator@gmail.com"
   }
 ]

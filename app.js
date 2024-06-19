@@ -152,6 +152,18 @@ app.post('/hapus/:nama', (req, res) => {
         });
     });
 });
+app.get('/contact/:id', async (req, res) => {
+    const contacts = await getContacts();
+    const contactId = parseInt(req.params.id);
+    const contact = contacts.find(contact => contact.id === contactId);
+  
+    if (!contact) {
+      res.status(404).send('Contact not found');
+      return;
+    }
+  
+    res.render('detailcontact', { contact });
+  });
 app.get('/produk/:id', (req, res) => {
     res.send('product id: ' + req.params.id);
 });

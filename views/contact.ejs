@@ -38,13 +38,11 @@
         <table class="table table-primary table-striped table-columns" border="1">
             <thead>
                 <tr>
-                    <center>
                     <th>Nama</th>
                     <th>No Telepon</th>
                     <th>Aksi</th>
-                </center>
                 </tr>
-            </thead>
+            </thead>   
      <tbody>
         <a href="/tambah" class="btn btn-info" style="margin: 10px 0;">Tambah Kontak</a>
 
@@ -55,7 +53,8 @@
                     <td><%= contact.notelp %></td>
                     <td class="contact-actions">
                          <a href="/edit/<%= contact.nama %>" class="btn btn-primary">Edit</a> 
-
+                         <form action="/hapus/<%= contact.nama %>" method="POST" style="display:inline;">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Data ini akan di hapus?')">Hapus</button>
                         </form> 
                     </td>
                 </tr>
