@@ -45,7 +45,7 @@ function writeContactsFile(contacts, callback) {
     });
 }
 
-app.get('/', (req, res) => {
+app.get('/index', (req, res) => {
     res.render('index');
 });
 
