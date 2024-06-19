@@ -1,33 +1,31 @@
+<!-- views/detail.ejs -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail</title>
-    <!-- Sertakan CSS Bootstrap -->
+    <!-- Sertakan CSS Bootstrap jika diperlukan -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
     <div class="container">
         <h1>Detail Contact</h1>
-        <form action="/detail/<%= contact.nama %>" method="POST">
-            <div class="form-group">
-                <label for="nama">Nama</label>
-                <input type="text" id="nama" name="nama" value="<%= contact.nama %>" class="form-control" placeholder="Masukkan nama Anda" required>
+        <div class="card">
+            <div class="card-body">
+                <p class="card-text"><strong>Nama :</strong> <%= contact.nama %></p>
+                <p class="card-text"><strong>No Telepon :</strong> <%= contact.notelp %></p>
+                <p class="card-text"><strong>Email :</strong> <%= contact.email %></p>
+                <a href="/edit/<%= encodeURIComponent(contact.nama) %>" class="btn btn-primary">Edit</a>
+                <form action="/hapus/<%= encodeURIComponent(contact.nama) %>" method="POST" style="display: inline;">
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus kontak ini?')">Hapus</button>
+                </form>
+                <a href="/contact" class="btn btn-secondary">Kembali</a>
             </div>
-            <div class="form-group">
-                <label for="notelp">No Telp</label>
-                <input type="text" id="notelp" name="notelp" value="<%= contact.notelp %>" class="form-control" placeholder="Masukkan nomor telepon Anda" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" value="<%= contact.email %>" class="form-control" placeholder="Masukkan alamat email Anda" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Simpan</button>
-        </form>
+        </div>
     </div>
 
-    <!-- Sertakan script Bootstrap -->
+    <!-- Sertakan script Bootstrap jika diperlukan -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>

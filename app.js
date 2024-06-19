@@ -45,7 +45,7 @@ function writeContactsFile(contacts, callback) {
     });
 }
 
-app.get('/index', (req, res) => {
+app.get('/', (req, res) => {
     res.render('index');
 });
 
@@ -152,18 +152,26 @@ app.post('/hapus/:nama', (req, res) => {
         });
     });
 });
-app.get('/contact/:id', async (req, res) => {
-    const contacts = await getContacts();
-    const contactId = parseInt(req.params.id);
-    const contact = contacts.find(contact => contact.id === contactId);
-  
-    if (!contact) {
-      res.status(404).send('Contact not found');
-      return;
-    }
-  
-    res.render('detailcontact', { contact });
-  });
+// Route untuk menampilkan detail kontak berdasarkan nama
+app.get('/contact/:nama', (req, res) => {
+    const contactName = req.params.nama;
+    readContactsFile((err, contacts) => {
+        if (err) {
+            console.error('Error reading contacts file:', err);
+            res.status(500).send('Error reading contacts file');
+            return;
+        }
+        const contact = contacts.find(c => c.nama === contactName);
+        if (!contact) {
+            console.log(`Contact with name ${contactName} not found`);
+            res.status(404).send('Contact not found');
+            return;
+        }
+        res.render('detailcontact', { contact: contact });
+    });
+});
+
+
 app.get('/produk/:id', (req, res) => {
     res.send('product id: ' + req.params.id);
 });
