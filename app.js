@@ -10,6 +10,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+app.use((req, res, next) => {
+    console.log('Time:', Date.now())
+    next()
+  })
+  
 function readContactsFile(callback) {
     const filePath = path.join(__dirname, 'contacts.json');
     fs.readFile(filePath, 'utf8', (err, data) => {
