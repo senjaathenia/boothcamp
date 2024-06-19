@@ -1,32 +1,47 @@
 [
   {
-    "nama": "Gintoki",
-    "notelp": "0823613974458",
-    "email": "shiroyasha@gmail.com"
-  },
-  {
-    "nama": "Dazai",
-    "notelp": "08164573234233",
-    "email": "dazaiosamu@gmail.com"
+    "nama": "Nami",
+    "notelp": "08217391398133",
+    "email": "navigator@gmail.com"
   },
   {
     "nama": "Luffy",
-    "notelp": "0861375176899",
+    "notelp": "08613751768992",
     "email": "kaizoku@gmail.com"
   },
   {
-    "nama": "Kenma",
-    "notelp": "08646534765577",
-    "email": "gamers@gmail.com"
+    "nama": "Robin",
+    "notelp": "08646534767100",
+    "email": "poneglyph@gmail.com"
   },
   {
-    "nama": "Asta",
-    "notelp": "08739246293419",
-    "email": "blackclover@gmail.com"
+    "nama": "Sanji",
+    "notelp": "08189461746781",
+    "email": "blackleg@gmail.com"
   },
   {
     "nama": "Zoro",
     "notelp": "08921381239231",
     "email": "santoryu@gmail.com"
+  },
+  {
+    "nama": "Franky",
+    "notelp": "08164573234233",
+    "email": "robot@gmail.com"
+  },
+  {
+    "nama": "Chopper",
+    "notelp": "08132123177563",
+    "email": "doctor@gmail.com"
+  },
+  {
+    "nama": "Brook",
+    "notelp": "08913491024911",
+    "email": "soul@gmail.com"
+  },
+  {
+    "nama": "Jinbe",
+    "notelp": "08134124821423",
+    "email": "kaikyou@gmail.com"
   }
 ]

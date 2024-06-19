@@ -13,15 +13,15 @@
         <form action="/edit/<%= contact.nama %>" method="POST">
             <div class="form-group">
                 <label for="nama">Nama</label>
-                <input type="text" id="nama" name="nama" class="form-control" placeholder="Masukkan nama Anda" required>
+                <input type="text" id="nama" name="nama" value="<%= contact.nama %>" class="form-control" placeholder="Masukkan nama Anda" required>
             </div>
             <div class="form-group">
                 <label for="notelp">No Telp</label>
-                <input type="text" id="notelp" name="notelp" class="form-control" placeholder="Masukkan nomor telepon Anda" required>
+                <input type="text" id="notelp" name="notelp" value="<%= contact.notelp %>" class="form-control" placeholder="Masukkan nomor telepon Anda" required>
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" class="form-control" placeholder="Masukkan alamat email Anda" required>
+                <input type="email" id="email" name="email" value="<%= contact.email %>" class="form-control" placeholder="Masukkan alamat email Anda" required>
             </div>
             <button type="submit" class="btn btn-primary">Simpan</button>
         </form>
