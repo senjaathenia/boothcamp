@@ -1,0 +1,11 @@
+/* CSS untuk membuat foto berbentuk kotak dengan ujung bulat */
+.rounded-corner {
+    border-radius: 15px; /* Sesuaikan nilai ini untuk mengatur seberapa bulat ujungnya */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Tambahkan bayangan untuk efek yang lebih baik */
+}
+
+/* Tambahkan efek hover untuk gambar */
+.img-fluid:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
