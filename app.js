@@ -3,8 +3,16 @@ const app = express();
 const fs = require('fs');
 const path = require('path');
 const bodyParser = require('body-parser');
-const port = 3000;
 const morgan = require('morgan')
+const pool = require("./db");
+const { log } = require('console');
+
+app.use(express.json())
+const port = 3000
+
+app.listen(port, () => {
+    console.log(`Example app listening on port`);
+})
 
 app.use((req, res, next) => {
     console.log('Time:', Date.now())
@@ -93,6 +101,20 @@ app.post('/addContact', (req, res) => {
         });
     });
 });
+
+app.get("/addasync", async(req,res) => {
+    try{
+        const nama = "shilla"
+        const notelp = "0895371890800"
+        const email = "ratsilahzahra@gmail.com"
+        const newCont = await pool.query(`INSERT INTO contact values
+        ('${nama}','${notelp}','${email}') RETURNING *1`)
+        res.json(newCont)
+    } catch (err) {
+        console.error(err.message);
+    }
+})
+
 app.get('/edit/:nama', (req, res) => {
     const contactName = req.params.nama;
     readContactsFile((err, contacts) => {
