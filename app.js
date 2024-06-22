@@ -4,20 +4,28 @@ const fs = require('fs');
 const path = require('path');
 const bodyParser = require('body-parser');
 const morgan = require('morgan')
-const pool = require("./db");
 const { log } = require('console');
+const pool = require("./db");
 
 app.use(express.json())
 const port = 3000
 
 app.listen(port, () => {
-    console.log(`Example app listening on port`);
+    console.log(`Example app listening on port ${port}`)
 })
+pool.connect((err, client, release) => {
+    if (err) {
+        return console.error('Error acquiring client', err.stack);
+    }
+    console.log('Connected to PostgreSQL database');
+    client.release(); // Release the client back to the pool
+});
 
 app.use((req, res, next) => {
     console.log('Time:', Date.now())
     next()
   })
+  
 app.use(express.static('public'))
 app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -40,18 +48,18 @@ function readContactsFile(callback) {
         }
     });
 }
-
+app.get('/contacts', async (req, res) => {
+    try {
+      const result = await pool.query('SELECT * FROM contacts');
+      const contacts = result.rows;
+      res.render('contacts', { contacts });
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  });
 // Fungsi untuk menulis ke file contacts.json
-function writeContactsFile(contacts, callback) {
-    const filePath = path.join(__dirname, 'contacts.json');
-    fs.writeFile(filePath, JSON.stringify(contacts, null, 2), (err) => {
-        if (err) {
-            callback(err);
-            return;
-        }
-        callback(null);
-    });
-}
+
 
 app.get('/', (req, res) => {
     res.render('index');
@@ -61,7 +69,7 @@ app.get('/about', (req, res) => {
     res.render('about');
 });
 
-app.get('/contact', (req, res) => {
+app.get('/contacts', (req, res) => {
     const filePath = path.join(__dirname, 'contacts.json');
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
@@ -79,42 +87,32 @@ app.get('/contact', (req, res) => {
 app.get('/tambah', (req, res) => {
     res.render('tambah');
 });
-app.post('/addContact', (req, res) => {
-    const { nama, notelp, email } = req.body;
-    const filePath = path.join(__dirname, 'contacts.json');
-    fs.readFile(filePath, 'utf8', (err, data) => {
-        if (err) {
-            res.status(500).send('Error reading the contacts file');
-            return;
-        }
-        let contacts = [];
-        if (data) {
-            contacts = JSON.parse(data);
-        }
-        contacts.push({ nama, notelp, email });
-        fs.writeFile(filePath, JSON.stringify(contacts, null, 2), (err) => {
-            if (err) {
-                res.status(500).send('Error writing to the contacts file');
-                return;
-            }
-            res.redirect('/contact');
-        });
-    });
-});
 
+app.post('/addContact', async (req, res) => {
+    const { nama, notelp, email } = req.body;
+    try {
+        const newContact = await pool.query(
+            'INSERT INTO contacts (nama, notelp, email) VALUES ($1, $2, $3)',
+            [nama, notelp, email]
+        );
+        res.redirect('/contact');
+    } catch (err) {
+        console.error('Error adding contact:', err);
+        res.status(500).send('Error adding contact');
+    }
+});
 app.get("/addasync", async(req,res) => {
     try{
         const nama = "shilla"
         const notelp = "0895371890800"
         const email = "ratsilahzahra@gmail.com"
         const newCont = await pool.query(`INSERT INTO contact values
-        ('${nama}','${notelp}','${email}') RETURNING *1`)
+        ('${nama}','${notelp}','${email}') RETURNING *`)
         res.json(newCont)
     } catch (err) {
         console.error(err.message);
     }
 })
-
 app.get('/edit/:nama', (req, res) => {
     const contactName = req.params.nama;
     readContactsFile((err, contacts) => {
@@ -132,67 +130,67 @@ app.get('/edit/:nama', (req, res) => {
 });
 
 // Simpan perubahan pada kontak
-app.post('/edit/:nama', (req, res) => {
+app.post('/edit/:nama', async (req, res) => {
     const contactName = req.params.nama;
-    const { nama, notelp, email } = req.body;
-    readContactsFile((err, contacts) => {
-        if (err) {
-            res.status(500).send('Error reading contacts file');
-            return;
-        }
-        const contactIndex = contacts.findIndex(c => c.nama === contactName);
-        if (contactIndex === -1) {
-            res.status(404).send('Contact not found');
-            return;
-        }
-        contacts[contactIndex] = { ...contacts[contactIndex], nama, notelp, email };
-        writeContactsFile(contacts, (err) => {
-            if (err) {
-                res.status(500).send('Error writing to contacts file');
-                return;
-            }
-            res.redirect('/contact');
-        });
-    });
+    const { notelp, email } = req.body;
+    try {
+        const result = await pool.query(
+            'UPDATE contacts SET notelp = $1, email = $2 WHERE nama = $3',
+            [notelp, email, contactName]
+        );
+        res.redirect('/contact'); // Redirect ke halaman kontak setelah berhasil diupdate
+    } catch (err) {
+        console.error('Error updating contact:', err);
+        res.status(500).send('Error updating contact');
+    }
 });
-app.post('/hapus/:nama', (req, res) => {
-    const contactName = req.params.nama;
-    console.log(`Menghapus kontak dengan nama: ${contactName}`);  // Log nama kontak yang akan dihapus
 
-    readContactsFile((err, contacts) => {
-        if (err) {
-            res.status(500).send('Error reading contacts file');
-            return;
-        }
-        const updatedContacts = contacts.filter(c => c.nama !== contactName);
-        writeContactsFile(updatedContacts, (err) => {
-            if (err) {
-                res.status(500).send('Error writing to contacts file');
-                return;
-            }
-            res.redirect('/contact');
-        });
-    });
+app.post('/hapus/:nama', async (req, res) => {
+    const contactName = req.params.nama;
+    try {
+        const result = await pool.query(
+            'DELETE FROM contacts WHERE nama = $1',
+            [contactName]
+        );
+        res.redirect('/contact'); // Redirect ke halaman kontak setelah berhasil dihapus
+    } catch (err) {
+        console.error('Error deleting contact:', err);
+        res.status(500).send('Error deleting contact');
+    }
 });
+
 // Route untuk menampilkan detail kontak berdasarkan nama
-app.get('/contact/:nama', (req, res) => {
+// app.get('/contact/:nama', (req, res) => {
+//     const contactName = req.params.nama;
+//     readContactsFile((err, contacts) => {
+//         if (err) {
+//             console.error('Error reading contacts file:', err);
+//             res.status(500).send('Error reading contacts file');
+//             return;
+//         }
+//         const contact = contacts.find(c => c.nama === contactName);
+//         if (!contact) {
+//             console.log(`Contact with name ${contactName} not found`);
+//             res.status(404).send('Contact not found');
+//             return;
+//         }
+//         res.render('detailcontact', { contact: contact });
+//     });
+// });
+app.get('/contact/:nama', async (req, res) => {
     const contactName = req.params.nama;
-    readContactsFile((err, contacts) => {
-        if (err) {
-            console.error('Error reading contacts file:', err);
-            res.status(500).send('Error reading contacts file');
-            return;
-        }
-        const contact = contacts.find(c => c.nama === contactName);
-        if (!contact) {
-            console.log(`Contact with name ${contactName} not found`);
+    try {
+        const contact = await pool.query('SELECT * FROM contacts WHERE nama = $1', [contactName]);
+        if (contact.rows.length === 0) {
             res.status(404).send('Contact not found');
-            return;
+        } else {
+            res.render('detailcontact', { contact: contact.rows[0] });
         }
-        res.render('detailcontact', { contact: contact });
-    });
+    } catch (err) {
+        console.error('Error retrieving contact:', err.message);
+        res.status(500).send('Error retrieving contact');
+    }
 });
-
 
 app.get('/produk/:id', (req, res) => {
     res.send('product id: ' + req.params.id);
@@ -202,6 +200,3 @@ app.use((req, res) => {
     res.status(404).send('Page not found 404');
 });
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
-});
