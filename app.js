@@ -152,7 +152,7 @@ app.post('/hapus/:nama', async (req, res) => {
             'DELETE FROM contacts WHERE nama = $1',
             [contactName]
         );
-        res.redirect('/contact'); // Redirect ke halaman kontak setelah berhasil dihapus
+        res.redirect('/contacts'); // Redirect ke halaman kontak setelah berhasil dihapus
     } catch (err) {
         console.error('Error deleting contact:', err);
         res.status(500).send('Error deleting contact');
