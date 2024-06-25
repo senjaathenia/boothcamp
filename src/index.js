@@ -4,9 +4,9 @@ import Navbar from "./navbar";// Pastikan jalur impor benar
 import Header from "./header";
 import Comment from "./Comments";
 
-const element = <h1 className="content">This is React</h1>;
+// const element = <h1 className="content">This is React</h1>;
 
-ReactDOM.render(element, document.getElementById("root"));
+// ReactDOM.render(element, document.getElementById("root"));
 
 ReactDOM.render(<Navbar />, document.getElementById("navbar"));
 
