@@ -70,14 +70,6 @@ class Comment extends Component {
         {comments.map((comment, index) => (
           <CommentComponent key={index} {...comment} />
         ))}
-        <form className="ui reply form">
-          <div className="field">
-            <textarea></textarea>
-          </div>
-          <div className="ui blue labeled submit icon button">
-            <i className="icon edit"></i> Add Reply
-          </div>
-        </form>
       </div>
     );
   }
