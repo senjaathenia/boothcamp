@@ -16,7 +16,6 @@ const Unsplash = () => {
     fetchData();
   }, []);
 
-  return <div class ="uns">React App</div>;
 };
 
 export default Unsplash;

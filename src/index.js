@@ -1,20 +1,57 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import Navbar from "./navbar";
-import Header from "./header";
-import Comment from "./Comments";
-import UserForm from "./userform";
-import Unsplash from "./unsplash";
-// const element = <h1 className="content">This is React</h1>;
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Utama from './contacts/utama';
+import Contacts from './contacts/contacts';
+import About from './contacts/about';
+import AddContact from './contacts/addcontact'; // Import komponen AddContact
 
-// ReactDOM.render(element, document.getElementById("root"));
+const App = () => {
+  const handleNavigation = (path) => {
+    window.history.pushState({}, path, window.location.origin + path);
+    renderApp();
+  };
 
-ReactDOM.render(<Navbar />, document.getElementById("navbar"));
+  const renderApp = () => {
+    let component;
+    const currentPath = window.location.pathname;
 
-ReactDOM.render(<Header />, document.getElementById("header"));
+    if (currentPath === '/' || currentPath === '/utama') {
+      component = <Utama />;
+    } else if (currentPath === '/about') {
+      component = <About />;
+    } else if (currentPath === '/contacts') {
+      component = <Contacts />;
+    } else if (currentPath === '/addcontact') { // Tambahkan kondisi untuk halaman AddContact
+      component = <AddContact />;
+    } else {
+      component = <div>Halaman tidak ditemukan</div>;
+    }
 
-ReactDOM.render(<Comment />, document.getElementById("comments"));
+    ReactDOM.render(
+      <React.StrictMode>
+        <div>
+          <h1>Welcome to the Contact App</h1>
+          <nav>
+            <ul>
+              <li><button onClick={() => handleNavigation('/utama')}>Utama</button></li>
+              <li><button onClick={() => handleNavigation('/about')}>About</button></li>
+              <li><button onClick={() => handleNavigation('/contacts')}>Contacts</button></li>
+               </ul>
+          </nav>
+          {component}
+        </div>
+      </React.StrictMode>,
+      document.getElementById('root')
+    );
+  };
 
-ReactDOM.render(<UserForm />, document.getElementById("userform"));
+  // Handle initial rendering
+  renderApp();
 
-ReactDOM.render(<Unsplash />, document.getElementById("unsplash"));
+  // Handle back/forward browser navigation
+  window.onpopstate = renderApp;
+
+  return null;
+};
+
+ReactDOM.render(<App />, document.getElementById('root'));

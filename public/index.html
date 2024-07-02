@@ -52,10 +52,203 @@
 .uns{
   font-family: Arial, Helvetica, sans-serif;
 }
+/* src/App.css */
+
+/* CSS untuk tata letak yang lebih rapih */
+/* Gaya untuk input lebar */
+.wide-input {
+  width: calc(90% - 100px) !important; /* Sesuaikan dengan lebar yang diinginkan, minus lebar tombol */
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px;
+  margin-right: 10px; /* Jarak antara input teks dan tombol pencarian */
+}
+
+/* Gaya untuk tata letak foto */
+.photo-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 10px; /* Jarak antar foto */
+}
+
+.photo {
+  width: 100%;
+  height: auto;
+  border-radius: 8px; /* Membuat sudut gambar membulat */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Efek bayangan lembut */
+  overflow: hidden; /* Mengatasi gambar yang lebih besar */
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+/* //yt */
+.youtube-search-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.search-container {
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: flex-start; /* Align items to the top */
+}
+
+.logo-title {
+  display: flex;
+  align-items: center; /* Memastikan logo dan judul sejajar secara vertikal */
+  margin-right: 20px; /* Berikan jarak antara logo dan judul */
+}
+
+.logo {
+  width: 60px;
+  height: 40px;
+  margin-right: 10px; /* Berikan jarak antara logo dan judul */
+}
+
+.title {
+  font-size: 20px; /* Atur ukuran teks judul sesuai keinginan */
+  font-weight: bold; /* Sesuaikan berat teks judul sesuai keinginan */
+}
+
+.search-input {
+  width: calc(100% - 100px); /* Lebar input dikurangi lebar tombol search + margin */
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px;
+  margin-right: 5px; /* Jarak antara input teks dan tombol pencarian */
+}
+
+.search-button {
+  width: 80px;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.search-button:hover {
+  background-color: #0056b3;
+}
+
+.video-and-thumbnails {
+  display: flex;
+  width: 100%;
+}
+
+.video-details {
+  width: 70%;
+  margin-right: 20px;
+}
+
+.video-player {
+  margin-bottom: 20px;
+}
+
+.video-player iframe {
+  width: 100%;
+}
+
+.thumbnail-list {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.thumbnail-item {
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Jarak antara thumbnail dan teks */
+}
+
+.thumbnail-item img {
+  width: 150px; /* Atur lebar thumbnail sesuai keinginan */
+  height: auto;
+  border-radius: 4px;
+}
+
+.thumbnail-item h3 {
+  font-size: 14px; /* Sesuaikan ukuran teks */
+  margin: 0; /* Hilangkan margin default */
+  word-wrap: break-word; /* Memungkinkan teks untuk terbungkus */
+}
+/* Reset default margin and padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Centering the form */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0; /* Background color for the page */
+}
+
+.form-container {
+  width: 400px;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h2 {
+  margin-bottom: 10px;
+}
+
+.form-container label {
+  margin-bottom: 5px;
+  display: block;
+}
+
+.form-container .field-group {
+  margin-bottom: 15px;
+}
+
+.form-container .buttons {
+  margin-top: 15px;
+}
+
+.form-container .source-code {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: 'Courier New', Courier, monospace;
+  white-space: pre-wrap;
+}
+
   </style>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="navbar"></div>
+    <br>
+    <div id="jam"></div>
     <br>
     <div id="root"></div>
     <div id="comments"></div>
@@ -64,6 +257,14 @@
     <div id="userform"></div>
     <br>
     <div id="unsplash"></div>
+    <br>
+    <div id="photosearch"></div>
+    <br>
+    <div id="youtube"></div>
+   <br>
+   <div id="reducer"></div>
+   <br>
+   <div id="employe"></div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
